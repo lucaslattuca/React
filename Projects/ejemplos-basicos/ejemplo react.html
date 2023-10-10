@@ -1,0 +1,40 @@
+<div id="app"></div>
+
+<style>
+    button {
+        background: #09f;
+        color: #fff;
+        border: 0;
+        padding: 4px 8px;
+        font-size: 18px;
+        cursor: pointer;      
+    }
+    body {
+        background: #222;
+    }
+</style>
+
+<script>
+    import React from "https://esm.sh/react-dom@18.2.0"
+    import ReactDOM from "https://esm.sh/react-dom@18.2.0/client"
+
+    const appDom = document.getElementById('app')
+
+    const root = ReactDOM.createRoot(appDom)
+    const button1 = React.createElement('button', {"data-id": 123}, 'button 1')
+    const button2 = React.createElement('button', {"data-id": 456}, 'button 2')
+    const button3 = React.createElement('button', {"data-id": 789}, 'button 3')
+    
+    const container = React.createElement(React.Fragment, null, [button1, button2, button3])
+
+    root.render(container)
+
+    //esto es equivalente a usar JSX de esta manera
+
+    // <React.Fragment>
+    //     <button data-id="123">button 1</button>
+    //     <button data-id="123">button 2</button>
+    //     <button data-id="123">button 3</button>
+    // </React.Fragment>
+
+</script>
