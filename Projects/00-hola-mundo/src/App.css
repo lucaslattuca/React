@@ -38,13 +38,36 @@
 }
 
 .tw-followCard-followBtn:hover {
-    background-color: #09F;
+    opacity: .8;
 }
 
 .tw-followCard-followBtn.is-following{
-    border: 1px solid red;
+    border: 1px solid #BBB;
+    background: transparent;
+    color: #FFF;
+    width: 140px;
 }
 
 .tw-followCard-followBtn.is-following:hover {
-    background-color: rgba(248, 59, 59, 0.575);
+    background-color: rgba(255, 0, 0, 0.178);
+    color: red;
+    border: 1px solid red;
+    transition: .0s ease all;
+    opacity: 1;
+}
+
+.tw-followCard-followBtn.is-following:hover .tw-followCard-text {
+    display: none;
+}
+
+.tw-followCard-followBtn.is-following:hover .tw-followCard-stopFollow {
+    display: block;
+}
+
+.tw-followCard-text {
+    display: block;
+}
+
+.tw-followCard-stopFollow {
+    display: none;
 }
