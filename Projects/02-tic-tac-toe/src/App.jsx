@@ -5,31 +5,50 @@ import { Square } from './components/Square'
 import { TURNS } from './constants'
 import { checkWinnerFrom, checkEndGame } from './logic/board'
 import { WinnerModal } from './components/WinnerModal'
+import { resetGameStorage, saveGameToStorage } from './logic/storage'
 
 
 function App() {
-  const arrayEmpty = Array(9).fill(null)
-  const [board, setBoard] = useState(arrayEmpty)
-  const [turn, setTurn] = useState(TURNS.X)
+  const [board, setBoard] = useState(() => {
+    //inicializar el estado del board
+    const boardFromLocalStorage = window.localStorage.getItem('board')
+    return boardFromLocalStorage ? JSON.parse(boardFromLocalStorage) : Array(9).fill(null)
+  })
+  const [turn, setTurn] = useState(() => {
+    const turnFromLocalStorage = window.localStorage.getItem('turn')
+    return turnFromLocalStorage ?? TURNS.X
+  })
   const [winner, setWinner] = useState(null)
 
   const resetGame = () => {
-    setBoard(arrayEmpty)
+    setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+
+    resetGameStorage()
   }
 
   const updateBoard = (index) => {
-    if(board[index] || winner) return
-    const newBoard= [... board]
+    if (board[index] || winner) return
+    const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
 
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
+    //guardar estado
+    saveGameToStorage({
+      board: newBoard,
+      turn: newTurn
+    })
+
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', newTurn)
+
+    //ganador
     const newWinner = checkWinnerFrom(newBoard)
-    if(newWinner) {
+    if (newWinner) {
       confetti()
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
@@ -45,8 +64,8 @@ function App() {
         {
           board.map((square, index) => {
             return (
-              <Square key={index} index={index} 
-              updateBoard={updateBoard}>
+              <Square key={index} index={index}
+                updateBoard={updateBoard}>
                 {square}
               </Square>
             )
@@ -59,7 +78,7 @@ function App() {
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
 
-      <WinnerModal winner={winner} resetGame={resetGame}/>
+      <WinnerModal winner={winner} resetGame={resetGame} />
     </main>
   )
 }
