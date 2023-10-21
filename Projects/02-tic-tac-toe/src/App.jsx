@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti'
 
 import { Square } from './components/Square'
@@ -9,6 +9,7 @@ import { resetGameStorage, saveGameToStorage } from './logic/storage'
 
 
 function App() {
+  //Hook: useState
   const [board, setBoard] = useState(() => {
     //inicializar el estado del board
     const boardFromLocalStorage = window.localStorage.getItem('board')
@@ -55,6 +56,16 @@ function App() {
       setWinner(false)
     }
   }
+
+  //hook: useEffect -> se ejecuta cada vez que se renderiza el componente
+  useEffect(() => {
+    console.log("useEffect");
+  }, [winner]) // si le colocamos el 2do parámetro, que es un array (lista de dependencias), 
+  /* como vacío solo se ejecuta la 1ra vez que se renderiza el componente*/
+  /*
+    si le colocamos algo a la lista, se ejecuta cada vez que cambia algo relacionado a la dependencia
+    en este caso cada vez que tenemos un winner, se ejecuta
+  */
 
   return (
     <main className='board'>
