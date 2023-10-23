@@ -4,6 +4,7 @@ export function FollowMouse() {
     const [enabled, setEnabled] = useState(false)
     const [position, setPosition] = useState({ x: 0, y: 0 }) //usar null si no tengo el dato, si no inicializar con el tipo de dato que vamos a usar
 
+    //pointer move
     useEffect(() => {
         console.log('efecto', { enabled })
 
@@ -18,9 +19,25 @@ export function FollowMouse() {
         }
 
         //cleanUp --> para limpiar suscripciones (los eventListener)
-        return () => { // esto se ejecuta cuando deja de renderizar (se desmonta el componente) o cada vez que cambie la dependencia
+        return () => { // esto se ejecuta unicamente cuando deja de renderizar (se desmonta el componente) o cada vez que cambie la dependencia
             console.log('cleanUp')
             window.removeEventListener('pointermove', handleMove)
+        }
+    }, [enabled])
+
+    //las dependencias del useEffect
+    // [] -> solo se ejecuta una vez cuando se monta el componente
+    // [enable] -> se ejecuta cada vez que cambia enable (variable linea 4) y cuando se monta el componente 
+    // undefined -> cada vez que se renderiza el componente
+
+    //change body class
+    useEffect(() => {
+        document.body.classList.toggle('no-cursor', enabled)
+        //cleanUp --> para limpiar suscripciones (los eventListener)
+        return () => { // esto se ejecuta cuando deja de renderizar (se desmonta el componente) o cada vez que cambie la dependencia
+            document.body.classList.remove('no-cursor')
+            setPosition({ x: 0, y: 0 })
+            //no usar los setStates en los efectos cuando no se tienen dependencias, puede provocar loop infinito si no se controla la dependencia (incluso asi puede fallar)
         }
     }, [enabled])
 
