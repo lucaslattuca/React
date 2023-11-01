@@ -17,5 +17,9 @@ section {
 
 section img {
     max-width: 320px;
-    height: auto;
+    max-height: 400px;
+}
+
+main button {
+    margin: 0px 0px 20px 0px;
 }
