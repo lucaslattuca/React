@@ -34,20 +34,21 @@ function useSearch () {
 }
 
 function App() {
-  const { movies } = useMovies()
+  const {search, updateSearch, error} = useSearch()
+  const { movies, getMovies, loading } = useMovies({ search })
   //const inputRef = useRef() //--> para obtener las referencias del objeto, en este caso del boton buscar (hay que evitar su abuso)
 
-  const {search, updateSearch, error} = useSearch()
   
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    getMovies()
 
     //usando js puro de forma nativa
     //esto es mejor porque captura todos los campos, de la otra forma hay que usar un useRef por cada input
-    const fields = new window.FormData(event.target) /*Object.fromEntries(new window.FormData(event.target))*/ 
-    const inputSearch = fields.get('inputSearch')
-    console.log(inputSearch)
+    //const fields = new window.FormData(event.target) /*Object.fromEntries(new window.FormData(event.target))*/ 
+    //const inputSearch = fields.get('inputSearch')
+    //console.log(inputSearch)
 
     //usando el useRef de React --> evitar cuando hay varios objetos a los cuales referenciar ya que se tiene que crear uno para cada objeto
     //const value = inputRef.current.value
@@ -87,7 +88,7 @@ function App() {
         {error && <p style={{color: 'red'}}>{error}</p>}
       </header>
       <main>
-        <Movies movies={ movies }/>
+        { loading ? <p>Cargando...</p> : <Movies movies={ movies }/>}
       </main>
     </div>
   )
