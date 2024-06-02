@@ -62,7 +62,7 @@ export function App () {
                 )
             }
 
-            {/* <TwitterFollowCard  {...midudev} > --> de esta forma se le pasan todos los parametros a traves de un objeto declarado anteriormente
+            {/* <TwitterFollowCard  {...midudev} > --> de esta forma se le pasan todos los parametros a traves de un objeto declarado anteriormente pero es mala practica
                 <strong>Miguel Angel Duran</strong>
             </TwitterFollowCard> */}
 
