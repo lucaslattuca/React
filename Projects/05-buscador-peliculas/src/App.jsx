@@ -34,12 +34,11 @@ function useSearch () {
 }
 
 function App() {
+  const [sort, setSort] = useState(false)
   const {search, updateSearch, error} = useSearch()
-  const { movies, getMovies, loading } = useMovies({ search })
+  const { movies, getMovies, loading } = useMovies({ search, sort })
   //const inputRef = useRef() //--> para obtener las referencias del objeto, en este caso del boton buscar (hay que evitar su abuso)
-
   
-
   const handleSubmit = (event) => {
     event.preventDefault()
     getMovies()
@@ -67,6 +66,9 @@ function App() {
     updateSearch(newInputState)
   }
 
+  const handleSort = () => {
+    setSort(!sort)
+  }
   
 
   return (
@@ -83,6 +85,7 @@ function App() {
             //ref={inputRef}
             placeholder='Avengers, Matrix, Star Wars...' 
           />
+          <input type="checkbox" name="sort" onChange={handleSort} checked={sort} />
           <button type='submit'>Buscar</button>
         </form>
         {error && <p style={{color: 'red'}}>{error}</p>}
