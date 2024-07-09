@@ -3,9 +3,6 @@ import { useCatImage } from './hooks/useCatImage'
 import { useCatFact } from './hooks/useCatFact'
 import { ImageComponent } from './components/ImageComponent'
 
-
-//const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firstWord}?size=50&color=red&json=true`
-
 export function App() {
 
     const { fact, refreshFact } = useCatFact()

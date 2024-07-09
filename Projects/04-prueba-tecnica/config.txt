@@ -1,0 +1,41 @@
+PASO A PASO PARA CONFIGURAR REACT DESDE 0 CON VITE Y VANILLA JS
+
+- npm create vite@latest --> opcion vanilla
+- cd ruta del proyecto
+- npm install @vitejs/plugin-react -E (-E es version exacta)
+- npm install react react-dom -E (dependencias necesarias para usar react)
+- luego crear y configurar el archivo vite.config.js 
+    import { defineConfig } from 'vite'
+    import react from '@vitejs/plugin-react'
+    export default defineConfig({
+        plugins: [react()]
+    })
+
+- (cambiar en el index.html, en el src del script el main.js a main.jsx)
+- En el main.js, cambiarlo a jsx y crear el root para terminar el punto de entrada de la aplicacion
+    import { createRoot } from 'react-dom/client'
+    const root = createRoot(document.getElementById('app'))
+    root.render(<h1>Hola</h1>)
+
+- Como primer medida luego de tener el punto de entrada es instalar el linter para poder trabajar correctamente
+    - npm install standard -D
+    - agregarlo en el package.json
+        "eslintConfig": {
+            "extends": "./node_modules/standard/eslintrc.json"
+        }
+
+- crear el archivo App.jsx
+    export function App() {
+        return (
+            <main>
+                <h1>Hola</h1>
+            </main>
+        )
+    }
+
+- Por ultimo en el main.jsx, agregar el App.jsx
+    import { createRoot } from 'react-dom/client'
+    import { App } from './src/App'
+    const root = createRoot(document.getElementById('app'))
+    root.render(<App />)
+
