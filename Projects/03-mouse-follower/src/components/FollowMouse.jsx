@@ -16,6 +16,7 @@ export function FollowMouse() {
 
         if (enabled) {
             window.addEventListener('pointermove', handleMove)
+            // para verificar la cantidad de suscripciones que tiene el evento, en la consola del navegador ejecutar --> getEventListeners(window)
         }
 
         //cleanUp --> para limpiar suscripciones (los eventListener)
@@ -30,7 +31,7 @@ export function FollowMouse() {
     // [enable] -> se ejecuta cada vez que cambia enable (variable linea 4) y cuando se monta el componente 
     // undefined -> cada vez que se renderiza el componente
 
-    //change body class
+    //change body className
     useEffect(() => {
         document.body.classList.toggle('no-cursor', enabled)
         //cleanUp --> para limpiar suscripciones (los eventListener)
