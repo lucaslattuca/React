@@ -6,7 +6,6 @@ import { ImageComponent } from './components/ImageComponent'
 export function App() {
 
     const { fact, refreshFact } = useCatFact()
-    const { imageUrl } = useCatImage({ fact }) //para recuperar la imagen cada vez que tenemos una cita nueva
 
     const handleClick = async () => {
         refreshFact()
@@ -18,7 +17,7 @@ export function App() {
             <button onClick={handleClick}>Get new Fact</button>
             <section>
                 {fact && <p>{fact}</p>}
-                {imageUrl && <ImageComponent fact={fact} />}
+                <ImageComponent fact={fact} />
             </section>
         </main>
     )

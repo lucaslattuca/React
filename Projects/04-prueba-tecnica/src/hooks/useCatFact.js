@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getRandomFact } from "../services/facts"
 
-
 export function useCatFact() {
     const [fact, setFact] = useState()
 
@@ -9,7 +8,7 @@ export function useCatFact() {
         getRandomFact().then(newFact => setFact(newFact))
     }
 
-    //para recperar la cita al cargar la página
+    //para recuperar la cita al cargar la página
     useEffect(refreshFact, [])
 
     return { fact, refreshFact }
