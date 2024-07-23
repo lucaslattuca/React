@@ -1,5 +1,4 @@
 import './App.css'
-import { useCatImage } from './hooks/useCatImage'
 import { useCatFact } from './hooks/useCatFact'
 import { ImageComponent } from './components/ImageComponent'
 

@@ -8,6 +8,7 @@ const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
 export function useCatImage({ fact }) {
     const [imageUrl, setImageUrl] = useState()
 
+    //los useEffect por lo gral van dentro de un customHook para poder ser reutilizables
     useEffect(() => {
         if (!fact) return
         // const firstWord = fact.split(' ')[0] //la pimer palabra
