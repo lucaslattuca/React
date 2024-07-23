@@ -39,3 +39,15 @@ PASO A PASO PARA CONFIGURAR REACT DESDE 0 CON VITE Y VANILLA JS
     const root = createRoot(document.getElementById('app'))
     root.render(<App />)
 
+
+- Test
+    - instalar playwright (es como cypress) --> npm init playwright@latest
+        - elegir js o ts 
+        - nombre de la carpeta ('tests' seria el nombre en gral)
+        - añadir github actions --> no
+        - instalar browser --> si
+    - cambiar la extension del archivo playwright.config.js a playwright.config.cjs (para que no de error el required)
+    - en el archivo del test de la carpeta tests (generada x playwright) cambiar el required de la primer linea por import
+        - const {test, expect } = required('@playwright/test') --> import { test, expect } from '@playwright/test'
+        - Escribir el test en el archivo [nombre].spec.js
+            - npx playwright test  --> ejecutar el test
