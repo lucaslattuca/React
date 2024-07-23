@@ -1,5 +1,5 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'; //const {test, expect } = required('@playwright/test') 
 const LOCAL_HOST_URL = 'http://localhost:5173/'
 const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
 
