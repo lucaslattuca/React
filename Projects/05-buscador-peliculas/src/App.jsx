@@ -4,7 +4,7 @@ import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 
 
-function useSearch () {
+function useSearch() {
   const [search, updateSearch] = useState('')
   const [error, setError] = useState(null)
   const isFirstInput = useRef(true)
@@ -29,16 +29,16 @@ function useSearch () {
     setError(null)
   }, [search])
 
-  return {search, updateSearch, error}
+  return { search, updateSearch, error }
 
 }
 
 function App() {
   const [sort, setSort] = useState(false)
-  const {search, updateSearch, error} = useSearch()
+  const { search, updateSearch, error } = useSearch()
   const { movies, getMovies, loading } = useMovies({ search, sort })
   //const inputRef = useRef() //--> para obtener las referencias del objeto, en este caso del boton buscar (hay que evitar su abuso)
-  
+
   const handleSubmit = (event) => {
     event.preventDefault()
     getMovies()
@@ -69,29 +69,29 @@ function App() {
   const handleSort = () => {
     setSort(!sort)
   }
-  
+
 
   return (
     <div className='page'>
       <header>
         <h1>Buscador de Películas</h1>
         <form className='form' onSubmit={handleSubmit}>
-          <input  
+          <input
             style={{
-              border: '1px solid transparent', 
+              border: '1px solid transparent',
               borderColor: error ? 'red' : 'transparent'
             }}
-            onChange={handleChange} value={search} name='inputSearch' 
+            onChange={handleChange} value={search} name='inputSearch'
             //ref={inputRef}
-            placeholder='Avengers, Matrix, Star Wars...' 
+            placeholder='Avengers, Matrix, Star Wars...'
           />
-          <input type="checkbox" name="sort" onChange={handleSort} checked={sort} />
+          <input type="checkbox" name="sort" onChange={handleSort} checked={sort} title='ordenar alfabeticamente' />
           <button type='submit'>Buscar</button>
         </form>
-        {error && <p style={{color: 'red'}}>{error}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
       <main>
-        { loading ? <p>Cargando...</p> : <Movies movies={ movies }/>}
+        {loading ? <p>Cargando...</p> : <Movies movies={movies} />}
       </main>
     </div>
   )
